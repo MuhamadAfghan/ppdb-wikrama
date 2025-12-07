@@ -1,66 +1,126 @@
-<p align="center"><a href="https://laravel.com" target="_blank"><img src="https://raw.githubusercontent.com/laravel/art/master/logo-lockup/5%20SVG/2%20CMYK/1%20Full%20Color/laravel-logolockup-cmyk-red.svg" width="400" alt="Laravel Logo"></a></p>
+# Sistem PPDB SMK Wikrama Bogor
 
-<p align="center">
-<a href="https://github.com/laravel/framework/actions"><img src="https://github.com/laravel/framework/workflows/tests/badge.svg" alt="Build Status"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/dt/laravel/framework" alt="Total Downloads"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/v/laravel/framework" alt="Latest Stable Version"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/l/laravel/framework" alt="License"></a>
-</p>
+Aplikasi web untuk mengelola Penerimaan Peserta Didik Baru (PPDB) SMK Wikrama Bogor Tahun Pelajaran 2024-2025.
 
-## About Laravel
+## Tentang Proyek
 
-Laravel is a web application framework with expressive, elegant syntax. We believe development must be an enjoyable and creative experience to be truly fulfilling. Laravel takes the pain out of development by easing common tasks used in many web projects, such as:
+Sistem PPDB ini adalah aplikasi berbasis web yang dikembangkan untuk memfasilitasi proses pendaftaran siswa baru di SMK Wikrama Bogor. Aplikasi ini menyediakan platform digital yang memudahkan calon siswa untuk mendaftar dan melakukan pembayaran pendaftaran secara online.
 
-- [Simple, fast routing engine](https://laravel.com/docs/routing).
-- [Powerful dependency injection container](https://laravel.com/docs/container).
-- Multiple back-ends for [session](https://laravel.com/docs/session) and [cache](https://laravel.com/docs/cache) storage.
-- Expressive, intuitive [database ORM](https://laravel.com/docs/eloquent).
-- Database agnostic [schema migrations](https://laravel.com/docs/migrations).
-- [Robust background job processing](https://laravel.com/docs/queues).
-- [Real-time event broadcasting](https://laravel.com/docs/broadcasting).
+## Tujuan Proyek
 
-Laravel is accessible, powerful, and provides tools required for large, robust applications.
+1. **Digitalisasi Proses Pendaftaran** - Mengubah proses pendaftaran manual menjadi sistem online yang lebih efisien
+2. **Kemudahan Akses** - Memudahkan calon siswa mendaftar dari mana saja dan kapan saja
+3. **Manajemen Pembayaran** - Mengelola verifikasi pembayaran pendaftaran secara terstruktur
+4. **Transparansi** - Memberikan transparansi status pendaftaran dan pembayaran kepada calon siswa
+5. **Efisiensi Administrasi** - Mempermudah tim admin dalam mengelola data pendaftar dan verifikasi pembayaran
 
-## Learning Laravel
+## Fitur Utama
 
-Laravel has the most extensive and thorough [documentation](https://laravel.com/docs) and video tutorial library of all modern web application frameworks, making it a breeze to get started with the framework.
+### Untuk Calon Siswa (Student)
+- Registrasi akun dengan data lengkap (NISN, nama, email, jenis kelamin, asal sekolah, kontak)
+- Login ke sistem
+- Upload bukti pembayaran pendaftaran
+- Melacak status verifikasi pembayaran (pending, accepted, rejected)
+- Mengajukan ulang pembayaran jika ditolak
+- Download bukti pendaftaran dalam format PDF
 
-You may also try the [Laravel Bootcamp](https://bootcamp.laravel.com), where you will be guided through building a modern Laravel application from scratch.
+### Untuk Admin
+- Login ke sistem dengan akses khusus
+- Melihat daftar semua pembayaran yang masuk
+- Verifikasi bukti pembayaran (menerima atau menolak)
+- Mengelola data pendaftar
 
-If you don't feel like reading, [Laracasts](https://laracasts.com) can help. Laracasts contains thousands of video tutorials on a range of topics including Laravel, modern PHP, unit testing, and JavaScript. Boost your skills by digging into our comprehensive video library.
+## Teknologi yang Digunakan
 
-## Laravel Sponsors
+- **Framework**: Laravel 11.x
+- **Bahasa**: PHP 8.2+
+- **Database**: MySQL/PostgreSQL
+- **Frontend**: Blade Templates, TailwindCSS
+- **PDF Generator**: DomPDF (Laravel-DomPDF)
+- **Build Tools**: Vite, PostCSS
 
-We would like to extend our thanks to the following sponsors for funding Laravel development. If you are interested in becoming a sponsor, please visit the [Laravel Partners program](https://partners.laravel.com).
+## Struktur Database
 
-### Premium Partners
+### Tabel Users
+Menyimpan data calon siswa dan admin:
+- NISN (unik)
+- Nama lengkap
+- Email (unik)
+- Jenis kelamin
+- Nama sekolah asal
+- Nomor telepon (siswa, ayah, ibu)
+- Role (admin/student)
 
-- **[Vehikl](https://vehikl.com/)**
-- **[Tighten Co.](https://tighten.co)**
-- **[WebReinvent](https://webreinvent.com/)**
-- **[Kirschbaum Development Group](https://kirschbaumdevelopment.com)**
-- **[64 Robots](https://64robots.com)**
-- **[Curotec](https://www.curotec.com/services/technologies/laravel/)**
-- **[Cyber-Duck](https://cyber-duck.co.uk)**
-- **[DevSquad](https://devsquad.com/hire-laravel-developers)**
-- **[Jump24](https://jump24.co.uk)**
-- **[Redberry](https://redberry.international/laravel/)**
-- **[Active Logic](https://activelogic.com)**
-- **[byte5](https://byte5.de)**
-- **[OP.GG](https://op.gg)**
+### Tabel Payments
+Menyimpan data pembayaran pendaftaran:
+- ID User (foreign key)
+- Nama pemilik rekening
+- Nama bank
+- Nominal pembayaran
+- Bukti bayar (file upload)
+- Status (pending/accepted/rejected)
 
-## Contributing
+## Instalasi
 
-Thank you for considering contributing to the Laravel framework! The contribution guide can be found in the [Laravel documentation](https://laravel.com/docs/contributions).
+1. Clone repository
+```bash
+git clone https://github.com/MuhamadAfghan/ppdb-wikrama.git
+cd ppdb-wikrama
+```
 
-## Code of Conduct
+2. Install dependencies
+```bash
+composer install
+npm install
+```
 
-In order to ensure that the Laravel community is welcoming to all, please review and abide by the [Code of Conduct](https://laravel.com/docs/contributions#code-of-conduct).
+3. Setup environment
+```bash
+cp .env.example .env
+php artisan key:generate
+```
 
-## Security Vulnerabilities
+4. Konfigurasi database di file `.env`
+```
+DB_CONNECTION=mysql
+DB_HOST=127.0.0.1
+DB_PORT=3306
+DB_DATABASE=ppdb_wikrama
+DB_USERNAME=root
+DB_PASSWORD=
+```
 
-If you discover a security vulnerability within Laravel, please send an e-mail to Taylor Otwell via [taylor@laravel.com](mailto:taylor@laravel.com). All security vulnerabilities will be promptly addressed.
+5. Jalankan migrasi dan seeder
+```bash
+php artisan migrate:fresh --seed
+```
 
-## License
+6. Build assets
+```bash
+npm run dev
+```
 
-The Laravel framework is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).
+7. Jalankan aplikasi
+```bash
+php artisan serve
+```
+
+Akses aplikasi di `http://localhost:8000`
+
+## Workflow Pendaftaran
+
+1. Calon siswa melakukan registrasi dengan mengisi data lengkap
+2. Login ke sistem menggunakan email dan password
+3. Upload bukti pembayaran pendaftaran (nama bank, nama pemilik rekening, nominal, foto bukti)
+4. Status pembayaran akan menjadi "pending"
+5. Admin melakukan verifikasi pembayaran
+6. Jika diterima, status berubah menjadi "accepted" dan siswa dapat download bukti pendaftaran
+7. Jika ditolak, status menjadi "rejected" dan siswa dapat mengajukan ulang
+
+## Kontribusi
+
+Proyek ini dikembangkan untuk SMK Wikrama Bogor. Untuk kontribusi atau pertanyaan, silakan hubungi tim pengembang.
+
+## Lisensi
+
+Proyek ini dikembangkan menggunakan Laravel framework yang berlisensi [MIT license](https://opensource.org/licenses/MIT).
