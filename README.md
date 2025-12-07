@@ -1,6 +1,6 @@
 # Sistem PPDB SMK Wikrama Bogor
 
-Aplikasi web untuk mengelola Penerimaan Peserta Didik Baru (PPDB) SMK Wikrama Bogor Tahun Pelajaran 2024-2025.
+Aplikasi web untuk mengelola Penerimaan Peserta Didik Baru (PPDB) SMK Wikrama Bogor Tahun Pelajaran 2024-2025. Proyek ini merupakan kloning dari sistem yang sudah ada, dikembangkan sebagai tugas pembelajaran untuk memahami alur kerja aplikasi PPDB berbasis Laravel.
 
 ## Tentang Proyek
 
